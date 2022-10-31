@@ -8,7 +8,7 @@ square and scaling up or down as necessary. It also renames them to a consisten 
  
 ## Running
  
-```python3 sdshell.py --srcdir <dir> --traindir <dir> --iname <conceptname>'''
+```python3 sdshell.py --srcdir <dir> --traindir <dir> --iname <conceptname>```
  
 ## Command line options
 
