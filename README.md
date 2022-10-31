@@ -5,10 +5,14 @@ square and scaling up or down as necessary. It also renames them to a consisten 
 "NAME (seq).jpg" where NAME is the parameter passed via --iname and <seq> is a sequence number.
  This is useful for taking a directory full of images and preparing them for learning with 
  a Dream Booth script.
+ 
+## Running
+ 
+```python3 sdshell.py --srcdir <dir> --traindir <dir> --iname <conceptname>'''
+ 
+## Command line options
 
-```Usage: sdshell.py [OPTIONS]
-
-Resizes images to 512x512 pixels and stores them in the training directory.
+```Usage: python3 sdshell.py [OPTIONS]
 
 Options:
   --srcdir TEXT          Source directory for the raw, unformatted images.
