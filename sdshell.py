@@ -35,8 +35,9 @@ def sdshell(srcdir, traindir, trainwidth, trainheight, iname):
     for filename in tqdm.tqdm(files):
         if filename.lower().endswith(('.png', '.jpg', '.jpeg')):
             img = Image.open(os.path.join(srcdir, filename))
+            img = img.convert('RGB')
             out = crop_center(img,trainwidth,trainheight)
-            out.save(os.path.join(traindir, iname+" ("+str(i)+")"), "jpeg")
+            out.save(os.path.join(traindir, iname+" ("+str(i)+").jpeg"), "jpeg")
             i = i+1
         else:
             continue
