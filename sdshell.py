@@ -29,18 +29,35 @@ def crop_center(img, tWidth, tHeight):
 
 def sdshell(srcdir, traindir, trainwidth, trainheight, iname):
     """Resizes images to 512x512 pixels and stores them in the training directory."""
+
+    if srcdir is None:
+        srcdir = os.getcwd()
+        traindir = os.getcwd()
+
     files = os.listdir(srcdir)
     print(f'Resizing {len(files)} files in {srcdir}.')
     i = 0
     for filename in tqdm.tqdm(files):
-        if filename.lower().endswith(('.png', '.jpg', '.jpeg')):
-            img = Image.open(os.path.join(srcdir, filename))
-            img = img.convert('RGB')
-            out = crop_center(img,trainwidth,trainheight)
-            out.save(os.path.join(traindir, iname+" ("+str(i)+").jpeg"), "jpeg")
-            i = i+1
-        else:
+        print(filename)
+        # Skip files that don't end with .png, .jpg or .jpeg
+        if not filename.lower().endswith(('.png', '.jpg', '.jpeg')):
             continue
+        # Skip files that contain "sdcrop" in the filename
+        if "sdcrop" in filename:
+            continue
+        
+        img = Image.open(os.path.join(srcdir, filename))
+        img = img.convert('RGB')
+        out = crop_center(img,trainwidth,trainheight)
+
+        if iname is not None:
+            fname_out = iname+" ("+str(i)+")"
+        else:
+            fname_out = os.path.splitext(filename)[0]+"-sdcrop"
+        print(fname_out)
+        fname_out = os.path.join(traindir, fname_out+".jpeg")
+        out.save(fname_out, "jpeg")
+        i = i+1
 
 if __name__ == '__main__':
     sdshell()
